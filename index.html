@@ -25,43 +25,61 @@
             height: 100%;
             border: none;
         }
-        /* สไตล์ปุ่มกดขยายเต็มจอ */
+        /* ไอคอนปุ่มเต็มจอวงกลม อยู่ที่มุมล่างซ้าย และจะหายไปเมื่อเข้าสู่โหมดเต็มจอ */
         #fs-btn {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            bottom: 20px;
+            left: 20px;
             z-index: 99999;
-            background: #1a73e8;
+            background: rgba(26, 115, 232, 0.9);
             color: white;
             border: none;
-            padding: 8px 14px;
-            border-radius: 4px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 20px;
+            transition: background 0.2s;
+        }
+        #fs-btn:hover {
+            background: rgb(21, 87, 176);
         }
     </style>
 </head>
 <body>
-    <button id="fs-btn" onclick="toggleFullscreen()">🛈 เต็มจอ</button>
+
+    <!-- ไอคอนปุ่มเปิดเต็มจอมุมล่างซ้าย -->
+    <button id="fs-btn" onclick="toggleFullscreen()" title="โหมดเต็มจอ">⛶</button>
 
     <div class="iframe-container">
+        <!-- อนุญาตให้ใช้งาน GPS และกล้อง/ไมค์ -->
         <iframe src="https://script.google.com/macros/s/AKfycbzzsn9gUK12Rt7OuIEW7Hb9sBSBecVgGV8I4xPNcArCzlt0BexJ9OKSuLBnRiLNwuzTPg/exec" 
                 allow="geolocation; camera; microphone"></iframe>
     </div>
 
     <script>
         function toggleFullscreen() {
+            const elem = document.documentElement;
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable fullscreen: ${err.message}`);
-                });
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
                 }
             }
         }
+
+        // ซ่อนไอคอนอัตโนมัติเมื่อเข้าสู่โหมดเต็มจอ และแสดงกลับมาเมื่อกดออก
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fs-btn');
+            if (document.fullscreenElement) {
+                btn.style.display = 'none';
+            } else {
+                btn.style.display = 'flex';
+            }
+        });
     </script>
 </body>
 </html>
