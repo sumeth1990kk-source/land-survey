@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสำรวจข้อมูลที่ดินและแผนที่</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f4f7f6;
+        }
+        .iframe-container {
+            position: absolute;
+            top: -40px; /* ดึงขึ้นไปซ่อนแถบสีเทาของ Google */
+            left: 0;
+            width: 100%;
+            height: calc(100% + 40px);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="iframe-container">
+        <!-- อนุญาตให้ใช้งาน GPS และกล้อง/ไมค์ -->
+        <iframe src="https://script.google.com/macros/s/AKfycbzzsn9gUK12Rt7OuIEW7Hb9sBSBecVgGV8I4xPNcArCzlt0BexJ9OKSuLBnRiLNwuzTPg/exec" 
+                allow="geolocation; camera; microphone"></iframe>
+    </div>
+</body>
+</html>
