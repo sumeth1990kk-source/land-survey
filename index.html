@@ -25,7 +25,7 @@
             height: 100%;
             border: none;
         }
-        /* ดีไซน์ไอคอนปุ่มเต็มจอแบบวงกลม ลอยอยู่มุมล่างซ้าย */
+        /* ไอคอนปุ่มเต็มจอวงกลม อยู่ที่มุมล่างซ้าย และจะหายไปเมื่อเข้าสู่โหมดเต็มจอ */
         #fs-btn {
             position: fixed;
             bottom: 20px;
@@ -52,7 +52,7 @@
 </head>
 <body>
 
-    <!-- ไอคอนปุ่มเปิดเต็มจอ -->
+    <!-- ไอคอนปุ่มเปิดเต็มจอมุมล่างซ้าย -->
     <button id="fs-btn" onclick="toggleFullscreen()" title="โหมดเต็มจอ">⛶</button>
 
     <div class="iframe-container">
@@ -71,13 +71,13 @@
             }
         }
 
-        // ตรวจสอบสถานะหน้าจอ: ถ้าเข้าสู่โหมดเต็มจอแล้ว "ซ่อนไอคอนทันที"
+        // ซ่อนไอคอนอัตโนมัติเมื่อเข้าสู่โหมดเต็มจอ และแสดงกลับมาเมื่อกดออก
         document.addEventListener('fullscreenchange', () => {
             const btn = document.getElementById('fs-btn');
             if (document.fullscreenElement) {
-                btn.style.display = 'none'; // ซ่อนไอคอน
+                btn.style.display = 'none';
             } else {
-                btn.style.display = 'flex'; // แสดงกลับมาถ้ากดออก
+                btn.style.display = 'flex';
             }
         });
     </script>
